@@ -17,6 +17,8 @@ public class Employee {
 
     @Column(unique = true)
     private String registration;
+
+    @Enumerated(EnumType.STRING)
     private Branch branch;
 
     @OneToMany(mappedBy = "employee")

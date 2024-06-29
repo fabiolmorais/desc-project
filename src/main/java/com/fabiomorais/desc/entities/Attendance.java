@@ -13,7 +13,7 @@ public class Attendance {
     private Long id;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant timestamp;
+    private Instant moment;
     private String location;
     private String imgUrl;
 
@@ -27,9 +27,9 @@ public class Attendance {
 
     public Attendance(){}
 
-    public Attendance(Long id, Instant timestamp, String location, String imgUrl, Employee employee, Meeting meeting) {
+    public Attendance(Long id, Instant moment, String location, String imgUrl, Employee employee, Meeting meeting) {
         this.id = id;
-        this.timestamp = timestamp;
+        this.moment = moment;
         this.location = location;
         this.imgUrl = imgUrl;
         this.employee = employee;
@@ -44,12 +44,12 @@ public class Attendance {
         this.id = id;
     }
 
-    public Instant getTimestamp() {
-        return timestamp;
+    public Instant getMoment() {
+        return moment;
     }
 
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
+    public void setMoment(Instant moment) {
+        this.moment = moment;
     }
 
     public String getLocation() {
