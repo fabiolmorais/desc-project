@@ -26,4 +26,18 @@ public class EmployeeService {
         Page<Employee> result = repository.findAll(pageable);
         return result.map(x -> new EmployeeDTO(x));
     }
+
+    @Transactional()
+    public EmployeeDTO insert(EmployeeDTO dto) {
+        Employee employee = new Employee();
+        copyDtoToEntity(dto, employee);
+        employee = repository.save(employee);
+        return new EmployeeDTO(employee);
+    }
+
+    private void copyDtoToEntity(EmployeeDTO dto, Employee entity) {
+        entity.setName(dto.getName());
+        entity.setRegistration(dto.getRegistration());
+        entity.setBranch(dto.getBranch());
+    }
 }
