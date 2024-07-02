@@ -35,6 +35,14 @@ public class EmployeeService {
         return new EmployeeDTO(employee);
     }
 
+    @Transactional()
+    public EmployeeDTO update(Long id, EmployeeDTO dto) {
+        Employee employee = repository.getReferenceById(id);
+        copyDtoToEntity(dto, employee);
+        employee = repository.save(employee);
+        return new EmployeeDTO(employee);
+    }
+
     private void copyDtoToEntity(EmployeeDTO dto, Employee entity) {
         entity.setName(dto.getName());
         entity.setRegistration(dto.getRegistration());
