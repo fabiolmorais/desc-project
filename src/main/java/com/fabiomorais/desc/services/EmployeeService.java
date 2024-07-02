@@ -43,6 +43,11 @@ public class EmployeeService {
         return new EmployeeDTO(employee);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
     private void copyDtoToEntity(EmployeeDTO dto, Employee entity) {
         entity.setName(dto.getName());
         entity.setRegistration(dto.getRegistration());
