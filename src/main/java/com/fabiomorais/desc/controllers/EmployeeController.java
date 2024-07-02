@@ -3,6 +3,8 @@ package com.fabiomorais.desc.controllers;
 import com.fabiomorais.desc.dto.EmployeeDTO;
 import com.fabiomorais.desc.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,12 @@ public class EmployeeController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<EmployeeDTO> findById(@PathVariable Long id) {
         EmployeeDTO dto = service.findById(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<EmployeeDTO>> findAll(Pageable pageable) {
+        Page<EmployeeDTO> dto = service.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 }
