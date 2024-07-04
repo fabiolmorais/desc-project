@@ -4,6 +4,7 @@ import com.fabiomorais.desc.dto.EmployeeDTO;
 import com.fabiomorais.desc.entities.Employee;
 import com.fabiomorais.desc.repositories.EmployeeRepository;
 import com.fabiomorais.desc.services.exception.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,10 +39,17 @@ public class EmployeeService {
 
     @Transactional()
     public EmployeeDTO update(Long id, EmployeeDTO dto) {
+
+        try {
+
         Employee employee = repository.getReferenceById(id);
         copyDtoToEntity(dto, employee);
         employee = repository.save(employee);
         return new EmployeeDTO(employee);
+
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
     }
 
     @Transactional
